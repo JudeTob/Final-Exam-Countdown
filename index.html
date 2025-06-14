@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Final Exam Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+    .countdown {
+      font-size: 1.5rem;
+      background: white;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+      direction: ltr;
+    }
+    h1, h2 {
+      direction: rtl;
+      font-family: 'Arial', sans-serif;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="countdown">
+    <h1>⏳ Time Left Until Final Exams End<br>الوقت المتبقي حتى نهاية الامتحانات</h1>
+    <div id="final"></div>
+  </div>
+
+  <div class="countdown">
+    <h2>📘 Math Exam<br>امتحان الرياضيات</h2>
+    <div id="math"></div>
+  </div>
+
+  <div class="countdown">
+    <h2>📖 Arabic Exam<br>امتحان اللغة العربية</h2>
+    <div id="arabic"></div>
+  </div>
+
+  <div class="countdown">
+    <h2>🌍 Social Studies Exam<br>امتحان الدراسات الاجتماعية</h2>
+    <div id="social"></div>
+  </div>
+
+  <script>
+    const events = {
+      final: new Date("2025-06-18T11:00:00+04:00"),
+      math: new Date("2025-06-16T09:00:00+04:00"),
+      arabic: new Date("2025-06-17T09:00:00+04:00"),
+      social: new Date("2025-06-18T09:00:00+04:00")
+    };
+
+    function updateCountdowns() {
+      const now = new Date();
+      for (const id in events) {
+        const diff = events[id] - now;
+        let output = "✅ Exam ended / انتهى الامتحان";
+
+        if (diff > 0) {
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((diff / (1000 * 60)) % 60);
+          const seconds = Math.floor((diff / 1000) % 60);
+
+          output = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        document.getElementById(id).innerText = output;
+      }
+    }
+
+    setInterval(updateCountdowns, 1000);
+    updateCountdowns();
+  </script>
+
+</body>
+</html>
